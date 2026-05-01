@@ -246,8 +246,9 @@ export async function POST(request: NextRequest) {
 
     // ── First-time promo ────────────────────────────────────────────
     let firstTimePromo = null
-    if (customerInfo.isFirstTime && (settings as Record<string, unknown>).firstTimePromoEnabled) {
-      const s = settings as Record<string, unknown>
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const s = settings as any
+    if (customerInfo.isFirstTime && s.firstTimePromoEnabled) {
       if (s.firstTimePromoType === 'PERCENT') {
         firstTimePromo = { type: 'PERCENT', percent: s.firstTimePromoPercent, message: s.firstTimePromoMessage || '' }
       } else if (s.firstTimePromoType === 'PRODUCT') {
@@ -262,7 +263,6 @@ export async function POST(request: NextRequest) {
     }
 
     // ── Send confirmation email (non-blocking) ────────────────────
-    const s2 = settings as Record<string, unknown>
     sendBookingConfirmation({
       guestName: name,
       guestEmail: email || '',
@@ -274,9 +274,9 @@ export async function POST(request: NextRequest) {
       status: booking.status as 'PENDING' | 'CONFIRMED',
       specialNote: specialNote || undefined,
       firstTimePromo: firstTimePromo as { type: 'PERCENT' | 'PRODUCT'; percent?: number; productName?: string; message?: string } | null,
-      restaurantName: (s2.restaurantName as string) || undefined,
-      restaurantAddress: (s2.restaurantAddress as string) || undefined,
-      restaurantPhone: (s2.restaurantPhone as string) || undefined,
+      restaurantName: (s.restaurantName as string) || undefined,
+      restaurantAddress: (s.restaurantAddress as string) || undefined,
+      restaurantPhone: (s.restaurantPhone as string) || undefined,
     }).catch(err => console.error('[Email] Background send failed:', err))
 
     return NextResponse.json({
