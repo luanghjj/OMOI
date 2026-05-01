@@ -1,26 +1,190 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* ─── OMOI Cafe Design System ─────────────────────── */
+/* Material 3 "Tactile Minimalism" palette              */
+/* Font: Plus Jakarta Sans                              */
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* ─── Core Colors ─────────────────────────────── */
+  --color-surface: #fff8f5;
+  --color-surface-dim: #e1d8d4;
+  --color-surface-bright: #fff8f5;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low: #fbf2ee;
+  --color-surface-container: #f5ece8;
+  --color-surface-container-high: #f0e6e2;
+  --color-surface-container-highest: #eae1dd;
+  --color-on-surface: #1f1b19;
+  --color-on-surface-variant: #50443d;
+  --color-inverse-surface: #342f2d;
+  --color-inverse-on-surface: #f8efeb;
+  --color-outline: #82746c;
+  --color-outline-variant: #d4c3ba;
+  --color-surface-tint: #7c563d;
+  --color-surface-variant: #eae1dd;
+
+  /* ─── Primary ─────────────────────────────────── */
+  --color-primary: #210b00;
+  --color-on-primary: #ffffff;
+  --color-primary-container: #3b1f0a;
+  --color-on-primary-container: #af8468;
+  --color-inverse-primary: #eebc9d;
+
+  /* ─── Secondary ───────────────────────────────── */
+  --color-secondary: #665d51;
+  --color-on-secondary: #ffffff;
+  --color-secondary-container: #ebdece;
+  --color-on-secondary-container: #6a6155;
+
+  /* ─── Tertiary ────────────────────────────────── */
+  --color-tertiary: #00141a;
+  --color-on-tertiary: #ffffff;
+  --color-tertiary-container: #022a34;
+  --color-on-tertiary-container: #70929e;
+
+  /* ─── Error ───────────────────────────────────── */
+  --color-error: #ba1a1a;
+  --color-on-error: #ffffff;
+  --color-error-container: #ffdad6;
+  --color-on-error-container: #93000a;
+
+  /* ─── Fixed Colors ────────────────────────────── */
+  --color-primary-fixed: #ffdcc6;
+  --color-primary-fixed-dim: #eebc9d;
+  --color-on-primary-fixed: #2e1503;
+  --color-on-primary-fixed-variant: #613f27;
+  --color-secondary-fixed: #eee1d1;
+  --color-secondary-fixed-dim: #d1c5b5;
+  --color-on-secondary-fixed: #211b11;
+  --color-on-secondary-fixed-variant: #4e463a;
+  --color-tertiary-fixed: #c5e8f5;
+  --color-tertiary-fixed-dim: #a9ccd9;
+  --color-on-tertiary-fixed: #001f27;
+  --color-on-tertiary-fixed-variant: #294b56;
+
+  /* ─── Background ──────────────────────────────── */
+  --color-background: #fff8f5;
+  --color-on-background: #1f1b19;
+
+  /* ─── Brand Accent (for CTAs, highlights) ─────── */
+  --color-brand-amber: #f5a623;
+
+  /* ─── Spacing ─────────────────────────────────── */
+  --spacing-unit: 8px;
+  --spacing-gutter: 24px;
+  --spacing-margin-mobile: 20px;
+  --spacing-stack-sm: 12px;
+  --spacing-stack-md: 24px;
+  --spacing-stack-lg: 48px;
+  --spacing-container-max: 1200px;
+
+  /* ─── Fonts ───────────────────────────────────── */
+  --font-display: "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-body: "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-label: "Plus Jakarta Sans", system-ui, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+/* ─── Base Styles ──────────────────────────────────── */
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  background-color: var(--color-background);
+  color: var(--color-on-surface);
+  -webkit-tap-highlight-color: transparent;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Material Icons ───────────────────────────────── */
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  vertical-align: middle;
+}
+
+.material-symbols-outlined.filled {
+  font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+/* ─── Floor Map Grid Background ────────────────────── */
+.floor-map-grid {
+  background-image: radial-gradient(var(--color-outline-variant) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* ─── Mesh Gradient Background (Admin) ─────────────── */
+.bg-mesh-gradient {
+  background-color: #fdfbf7;
+  background-image:
+    radial-gradient(at 0% 0%, rgba(245, 166, 35, 0.05) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(59, 31, 10, 0.05) 0px, transparent 50%);
+}
+
+/* ─── Tonal Shift (subtle gradient) ────────────────── */
+.tonal-shift {
+  background-image: linear-gradient(to bottom, transparent, rgba(59, 31, 10, 0.02));
+}
+
+/* ─── Check Glow (Confirmation page) ───────────────── */
+.check-glow {
+  box-shadow: 0 0 40px rgba(175, 132, 104, 0.2);
+}
+
+/* ─── Chart Gradients ──────────────────────────────── */
+.chart-gradient-amber {
+  background: linear-gradient(180deg, #f5a623 0%, rgba(245, 166, 35, 0.2) 100%);
+}
+
+.chart-gradient-brown {
+  background: linear-gradient(180deg, #3b1f0a 0%, rgba(59, 31, 10, 0.2) 100%);
+}
+
+/* ─── Custom Scrollbar ─────────────────────────────── */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--color-outline-variant);
+  border-radius: 10px;
+}
+
+/* ─── No Scrollbar (filter bar) ────────────────────── */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ─── Smooth Transitions ──────────────────────────── */
+.table-transition {
+  transition: fill 0.3s ease, transform 0.2s ease, opacity 0.3s ease;
+}
+
+/* ─── Bottom Sheet Animation ───────────────────────── */
+.bottom-sheet-enter {
+  transform: translateY(100%);
+  opacity: 0;
+}
+.bottom-sheet-active {
+  transform: translateY(0);
+  opacity: 1;
+  transition: transform 0.4s cubic-bezier(0.32, 0.72, 0, 1), opacity 0.3s ease;
+}
+
+/* ─── Skeleton Loading ─────────────────────────────── */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--color-surface-container) 25%,
+    var(--color-surface-container-high) 50%,
+    var(--color-surface-container) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+  border-radius: 8px;
 }
